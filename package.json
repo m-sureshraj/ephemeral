@@ -1,0 +1,23 @@
+{
+  "name": "ephemeral-link",
+  "version": "0.0.0",
+  "description": "Open ephemeral host from the Bitbucket pull-request page",
+  "scripts": {
+    "build:firefox": "BROWSER=firefox node scripts/build.js",
+    "dev:firefox": "webpack --mode=development --browser=firefox",
+    "dev:chrome": "webpack --mode=development --browser=chrome",
+    "lint": "eslint '**/*.js'",
+    "test": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "1.19.1",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

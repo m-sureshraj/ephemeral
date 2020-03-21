@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "version": "0.0.1",
+  "name": "Ephemeral Link",
+  "description": "Open ephemeral host from the Bitbucket pull-request page",
+
+  "content_scripts": [
+    {
+      "matches": ["https://bitbucket.org/*/*/pull-requests/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "permissions": ["https://*.harver-dev.com/", "webNavigation"],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

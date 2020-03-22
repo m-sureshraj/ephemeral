@@ -1,3 +1,7 @@
 # /node_modules/* in the project root are ignored by default
 
+# Don't ignore the dot js files in the root (e.g. .eslintrc.js)
 !.*.js
+
+build/
+deploy/

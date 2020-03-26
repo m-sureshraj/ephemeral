@@ -1,7 +1,11 @@
-const urlToMatch = 'https://bitbucket.org/[a-z]+/[a-z-]+/pull-requests/\\d+';
+const pullRequestPageUrl = 'https://bitbucket.org/[a-z]+/[a-z-]+/pull-requests/\\d+';
 
 function notify(tabId) {
-  chrome.tabs.sendMessage(tabId, {});
+  chrome.tabs.sendMessage(tabId, {}, () => {
+    if (chrome.runtime.lastError) {
+      console.error(chrome.runtime.lastError);
+    }
+  });
 }
 
 function handleHistoryStateUpdate(details) {
@@ -17,21 +21,30 @@ function handleWebNavigationComplete(details) {
 }
 
 function handleMessageFromContentScript(payload) {
-  console.log(payload);
+  console.log(payload); // for debugging
+}
+
+function handleInstalled({ reason }) {
+  if (reason === 'install') {
+    console.debug('Extension successfully installed');
+    chrome.runtime.openOptionsPage();
+  }
 }
 
 // Fired when the frame's history was updated to a new URL. (e.g. client side routing)
 chrome.webNavigation.onHistoryStateUpdated.addListener(handleHistoryStateUpdate, {
-  url: [{ urlMatches: urlToMatch }],
+  url: [{ urlMatches: pullRequestPageUrl }],
 });
 
 // Fired when a document, including the resources it refers to, is completely loaded and initialized
 // E.g. Full page reload
 chrome.webNavigation.onCompleted.addListener(handleWebNavigationComplete, {
-  url: [{ urlMatches: urlToMatch }],
+  url: [{ urlMatches: pullRequestPageUrl }],
 });
 
 // Listening incoming messages from the content script
 chrome.runtime.onConnect.addListener(port => {
   port.onMessage.addListener(handleMessageFromContentScript);
 });
+
+chrome.runtime.onInstalled.addListener(handleInstalled);

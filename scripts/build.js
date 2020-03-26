@@ -99,7 +99,7 @@ const build = async () => {
   console.log(yellow(`\nBuild: ${buildPath}`));
 };
 
-// Let's do this :)
+// Let's build this :)
 (async () => {
   try {
     await build();

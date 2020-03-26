@@ -21,6 +21,13 @@ class Logger {
     });
   }
 
+  warn(message) {
+    this.channel.postMessage({
+      type: 'warn',
+      message,
+    });
+  }
+
   disconnect() {
     this.channel.disconnect();
   }

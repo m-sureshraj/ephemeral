@@ -1,27 +1,37 @@
 {
   "manifest_version": 2,
 
-  "name": "Ephemeral Link",
+  "name": "Ephemeral",
   "version": "0.0.1",
   "description": "Open ephemeral host from the Bitbucket pull-request page",
+  "icons": {
+    "16": "icons/logo-16.png",
+    "32": "icons/logo-32.png",
+    "64": "icons/logo-64.png",
+    "128": "icons/logo-128.png"
+  },
 
   "applications": {
     "gecko": {
-      "id": "@ephemeral-link"
+      "id": "@ephemeral"
     }
   },
 
   "content_scripts": [
     {
-      "matches": ["https://bitbucket.org/*/*/pull-requests/*"],
+      "matches": ["https://bitbucket.org/*"],
       "js": ["content-script.js"]
     }
   ],
+
+  "options_ui": {
+    "page": "options.html"
+  },
 
   "background": {
     "scripts": ["background.js"]
   },
 
-  "permissions": ["https://*.harver-dev.com/", "webNavigation"],
+  "permissions": ["<all_urls>", "webNavigation", "storage"],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
 }

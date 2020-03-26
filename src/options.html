@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ephemeral link settings</title>
+    <style>
+      h2,
+      form,
+      label,
+      input,
+      p,
+      button {
+        margin: 0;
+        padding: 0;
+      }
+      .title {
+        margin: 16px 0;
+      }
+      .row {
+        display: flex;
+        margin-bottom: 20px;
+      }
+      label {
+        min-width: 80px;
+      }
+      .info {
+        margin-top: 8px;
+        font-size: 14px;
+      }
+      input {
+        min-width: 70%;
+      }
+      button {
+        margin: 0 0 16px 80px;
+        min-width: 140px;
+        text-align: center;
+        padding: 2px 0;
+      }
+      code {
+        background: #f5f5f5;
+        color: #c7254e;
+        padding: 0 4px;
+      }
+      #url + .info {
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2 class="title">Settings</h2>
+    <form id="settings-form">
+      <div class="row">
+        <label for="label">Label</label>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="label"
+            placeholder="Give me an emoji please :)"
+            maxlength="8"
+            required
+          />
+          <p class="info">Max length is 8 characters</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="url">URL</label>
+        <div class="input-wrapper">
+          <input type="text" id="url" placeholder="Ephemeral URL" required />
+          <p class="info">
+            Enter the ephemeral URL. To denote branch name in the URL, use empty square
+            brackets <code>[]</code>. In the runtime, the empty square brackets will get
+            replaced with the branch name. E.g. <code>https://[].sub-domain.com</code> =>
+            <code>https://your-branch-name.sub-domain.com</code>
+          </p>
+        </div>
+      </div>
+
+      <button type="submit">Save</button>
+    </form>
+
+    <script src="options.js"></script>
+  </body>
+</html>

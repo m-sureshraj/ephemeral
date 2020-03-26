@@ -1,16 +1,20 @@
 const Logger = require('./logger');
 const { waitForElement, ping } = require('./utils');
+const { retrieveSettings } = require('./store');
 
-const log = new Logger();
+let logger;
 const selector = '[data-qa="pr-branches-and-state-styles"]';
 
-function getEphemeralHost(subDomain) {
-  return `https://${subDomain}.harver-dev.com`;
+function getEphemeralURL(branchName, url) {
+  // Regex to replace square brackets with branch name
+  const regex = /(\[\])/gi;
+
+  return url.replace(regex, branchName);
 }
 
-function createEphemeralLinkElement(href, isHostReachable) {
+function createEphemeralLinkElement(label, href, isHostReachable) {
   const anchor = document.createElement('a');
-  anchor.innerHTML = '&#127758;'; // Globe emoji
+  anchor.textContent = label;
 
   const attributes = {
     href,
@@ -40,36 +44,46 @@ function appendEphemeralLink(linkElement) {
   });
 }
 
-async function addEphemeralLinkToThePage(branchNameElement) {
+async function addEphemeralLinkToThePage(branchNameElement, linkLabel, linkHref) {
   const branchName = extractBranchName(branchNameElement);
-  const ephemeralHost = getEphemeralHost(branchName);
-  log.debug(`Ephemeral host: ${ephemeralHost}`);
+  const ephemeralURL = getEphemeralURL(branchName, linkHref);
+  logger.debug(`Ephemeral URL: ${ephemeralURL}`);
 
-  const isEphemeralHostReachable = await ping(ephemeralHost);
-  log.debug(`Is ephemeral host reachable: ${isEphemeralHostReachable}`);
+  const isEphemeralHostReachable = await ping(ephemeralURL);
+  logger.debug(`Is ephemeral host reachable: ${isEphemeralHostReachable}`);
 
   const ephemeralLink = createEphemeralLinkElement(
-    ephemeralHost,
+    linkLabel,
+    ephemeralURL,
     isEphemeralHostReachable,
   );
   appendEphemeralLink(ephemeralLink);
-  log.debug('Link successfully added to the page');
+  logger.debug('Link successfully added to the page');
 }
 
 async function processBackgroundNotification() {
-  let branchNameElement = document.querySelector(selector);
-
   try {
+    logger = new Logger();
+
+    const { label, url } = await retrieveSettings();
+    if (!url) {
+      logger.warn(
+        'Invalid URL! You must set ephemeral URL on the extension option page.',
+      );
+      return;
+    }
+
+    let branchNameElement = document.querySelector(selector);
     if (!branchNameElement) {
-      log.debug('Waiting for branch name element to appear');
+      logger.debug('Waiting for branch name element to appear');
       branchNameElement = await waitForElement(selector);
     }
 
-    await addEphemeralLinkToThePage(branchNameElement);
+    await addEphemeralLinkToThePage(branchNameElement, label, url);
   } catch (error) {
-    log.error(error);
+    logger.error(error);
   } finally {
-    log.disconnect();
+    logger.disconnect();
   }
 }
 

@@ -19,6 +19,7 @@ module.exports = (env, argv) => {
     entry: {
       'content-script': join(sourcePath, 'content-script.js'),
       background: join(sourcePath, 'background.js'),
+      options: join(sourcePath, 'options'),
     },
 
     output: {
@@ -31,7 +32,11 @@ module.exports = (env, argv) => {
         // to prevent unchanged files from removal
         cleanStaleWebpackAssets: false,
       }),
-      new CopyPlugin([{ from: join(manifestPath) }]),
+      new CopyPlugin([
+        { from: join(manifestPath) },
+        { from: join(sourcePath, 'options.html') },
+        { from: join(sourcePath, 'icons'), to: 'icons' },
+      ]),
     ],
   };
 };

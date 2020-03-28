@@ -8,7 +8,7 @@ button {
   padding: 0;
 }
 .title {
-  margin: 16px 0;
+  margin: 16px 0 24px;
 }
 .row {
   display: flex;

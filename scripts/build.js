@@ -18,7 +18,7 @@ const { BROWSER } = process.env;
 
 function getGitCommit() {
   try {
-    return execSync('git rev-parse --short HEAD')
+    return execSync('git show -s --format=%h')
       .toString()
       .trim();
   } catch (error) {

@@ -17,9 +17,14 @@ const { green, gray, yellow } = require('kleur');
 const { BROWSER } = process.env;
 
 function getGitCommit() {
-  return execSync('git rev-parse --short HEAD')
-    .toString()
-    .trim();
+  try {
+    return execSync('git rev-parse --short HEAD')
+      .toString()
+      .trim();
+  } catch (error) {
+    // When building the source for the Firefox review process, there is no Git revision.
+    return null;
+  }
 }
 
 function buildForProduction(rootPath, outputPath) {

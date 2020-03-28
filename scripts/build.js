@@ -22,7 +22,9 @@ function getGitCommit() {
       .toString()
       .trim();
   } catch (error) {
-    // When building the source for the Firefox review process, there is no Git revision.
+    // Mozilla runs this command from a git archive
+    // (When building the source code for the review process).
+    // In that context, there is no Git revision.
     return null;
   }
 }

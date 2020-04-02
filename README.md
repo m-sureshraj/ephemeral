@@ -16,19 +16,19 @@ This extension not ready for the general use case. It's only usable if the follo
 
 ## Setup
 You can configure the extension via the options page.
-<img src="media/options-page.png" alt="Options page">
+<img src="media/options-page.jpg" alt="Options page">
 
 | Option | Default Value | Description |
 | :- | :-: | :- |
 | Label | 🌎 | Link text. Only 8 characters allowed. |
-| URL | - | Testing environment URL. To denote branch name in the URL, use empty square brackets `[]`. In the runtime, the empty square brackets will get replaced with the branch name. E.g. `https://[].sub-domain.com` =>                        `https://your-branch-name.sub-domain.com` |
+| URL | - | Testing environment URL. To denote branch name in the URL, use empty square brackets `[]`. In the runtime, they will get replaced with the branch name. E.g. `https://[].sub-domain.com` =>                        `https://your-branch-name.sub-domain.com` |
 
 ### Extension in Action
 <img src="media/active-link.jpg" alt="Active link">
 <img src="media/inactive-link.jpg" alt="Inactive link">
 
 ## Credits
-* React dev tool [build script](https://github.com/facebook/react/blob/master/packages/react-devtools-extensions/build.js)
+* The build script is inspired by the React dev-tools-extensions [build script](https://github.com/facebook/react/blob/master/packages/react-devtools-extensions/build.js)
 
 ## license
 MIT © [Sureshraj](https://github.com/m-sureshraj)

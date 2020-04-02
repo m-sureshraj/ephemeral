@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Ephemeral Settings</title>
-    <link rel="stylesheet" href="options.css">
+    <link rel="stylesheet" href="options.css" />
   </head>
 
   <body>
@@ -28,10 +28,10 @@
         <div class="row">
           <label for="url">URL</label>
           <div class="input-wrapper">
-            <input type="text" id="url" placeholder="Ephemeral URL" required />
+            <input type="text" id="url" placeholder="Testing Environment URL" required />
             <p class="info">
-              Enter the ephemeral URL. To denote branch name in the URL, use empty square
-              brackets <code>[]</code>. In the runtime, the empty square brackets will get
+              Enter the testing environment URL. To denote branch name in the URL, use
+              empty square brackets <code>[]</code>. In the runtime, they will get
               replaced with the branch name. E.g.
               <code>https://[].sub-domain.com</code> =>
               <code>https://your-branch-name.sub-domain.com</code>

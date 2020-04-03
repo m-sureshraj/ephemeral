@@ -29,6 +29,7 @@ You can configure the extension via the options page.
 
 ## Credits
 * The build script is inspired by the React dev-tools-extensions [build script](https://github.com/facebook/react/blob/master/packages/react-devtools-extensions/build.js)
+* [Logo](https://www.flaticon.com/free-icon/rainbow-flag_1880621?term=rainbow&page=1&position=12)
 
 ## license
 MIT © [Sureshraj](https://github.com/m-sureshraj)

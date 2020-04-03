@@ -48,7 +48,7 @@ function updateManifestDescription(manifestPath) {
   const dateString = new Date().toLocaleDateString();
   const manifest = JSON.parse(readFileSync(manifestPath).toString());
 
-  manifest.description += `\n\nCreated from revision ${commit} on ${dateString}.`;
+  manifest.description += ` Created from revision ${commit} on ${dateString}.`;
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
   console.log(gray('- The manifest file successfully updated.'));
 }

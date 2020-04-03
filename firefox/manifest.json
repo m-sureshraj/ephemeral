@@ -3,7 +3,7 @@
 
   "name": "Ephemeral",
   "version": "0.0.2",
-  "description": "Adds pull request's test environment link to the Bitbucket pull request page for quick access.",
+  "description": "Adds pull request's test environment link to the Bitbucket pull request page.",
   "icons": {
     "16": "icons/logo-16.png",
     "32": "icons/logo-32.png",

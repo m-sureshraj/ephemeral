@@ -5,14 +5,14 @@ const { retrieveSettings } = require('./store');
 let logger;
 const selector = '[data-qa="pr-branches-and-state-styles"]';
 
-function getEphemeralURL(branchName, url) {
-  // Regex to replace square brackets with branch name
+function getTestEnvURL(branchName, url) {
+  // Regex to replace square brackets with the branch name
   const regex = /(\[\])/gi;
 
   return url.replace(regex, branchName);
 }
 
-function createEphemeralLinkElement(label, href, isHostReachable) {
+function createLinkElement(label, href, isEnvReachable) {
   const anchor = document.createElement('a');
   anchor.textContent = label;
 
@@ -23,8 +23,8 @@ function createEphemeralLinkElement(label, href, isHostReachable) {
     style: 'display: flex; margin-left: 6px; text-decoration: none;',
   };
 
-  if (!isHostReachable) {
-    attributes.title = 'Ephemeral host is not reachable';
+  if (!isEnvReachable) {
+    attributes.title = 'Test environment not reachable';
     attributes.style += 'filter: grayscale(100%);';
   }
 
@@ -35,7 +35,7 @@ function extractBranchName(element) {
   return element.firstChild.textContent;
 }
 
-function appendEphemeralLink(linkElement) {
+function appendLink(linkElement) {
   const targets = document.querySelectorAll(selector);
 
   targets.forEach((target, index) => {
@@ -44,20 +44,16 @@ function appendEphemeralLink(linkElement) {
   });
 }
 
-async function addEphemeralLinkToThePage(branchNameElement, linkLabel, linkHref) {
+async function addTestEnvLinkToThePage(branchNameElement, linkLabel, linkHref) {
   const branchName = extractBranchName(branchNameElement);
-  const ephemeralURL = getEphemeralURL(branchName, linkHref);
-  logger.debug(`Ephemeral URL: ${ephemeralURL}`);
+  const testEnvURL = getTestEnvURL(branchName, linkHref);
+  logger.debug(`Test environment URL: ${testEnvURL}`);
 
-  const isEphemeralHostReachable = await ping(ephemeralURL);
-  logger.debug(`Is ephemeral host reachable: ${isEphemeralHostReachable}`);
+  const isTestEnvReachable = await ping(testEnvURL);
+  logger.debug(`Is test environment reachable: ${isTestEnvReachable}`);
 
-  const ephemeralLink = createEphemeralLinkElement(
-    linkLabel,
-    ephemeralURL,
-    isEphemeralHostReachable,
-  );
-  appendEphemeralLink(ephemeralLink);
+  const link = createLinkElement(linkLabel, testEnvURL, isTestEnvReachable);
+  appendLink(link);
   logger.debug('Link successfully added to the page');
 }
 
@@ -68,7 +64,7 @@ async function processBackgroundNotification() {
     const { label, url } = await retrieveSettings();
     if (!url) {
       logger.warn(
-        'Invalid URL! You must set ephemeral URL on the extension option page.',
+        'Invalid URL! You must set test environment URL on the extension option page.',
       );
       return;
     }
@@ -79,7 +75,7 @@ async function processBackgroundNotification() {
       branchNameElement = await waitForElement(selector);
     }
 
-    await addEphemeralLinkToThePage(branchNameElement, label, url);
+    await addTestEnvLinkToThePage(branchNameElement, label, url);
   } catch (error) {
     logger.error(error);
   } finally {
@@ -87,5 +83,10 @@ async function processBackgroundNotification() {
   }
 }
 
-// fixme: process one notification at a time
 chrome.runtime.onMessage.addListener(processBackgroundNotification);
+
+// For testing purpose
+module.exports = {
+  selector,
+  processBackgroundNotification,
+};

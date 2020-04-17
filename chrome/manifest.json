@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Ephemeral",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Adds pull request's test environment link to the Bitbucket pull request page.",
   "icons": {
     "16": "icons/logo-16.png",

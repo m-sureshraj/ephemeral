@@ -47,3 +47,9 @@ async function handleDOMContentLoaded() {
 }
 
 document.addEventListener('DOMContentLoaded', handleDOMContentLoaded);
+
+// For testing purpose
+module.exports = {
+  handleFormSubmit,
+  handleDOMContentLoaded,
+};

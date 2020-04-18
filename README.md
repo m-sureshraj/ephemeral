@@ -1,4 +1,4 @@
-# Ephemeral
+# ephemeral
 <img align="right" width="128" height="128" src="media/logo-128.png">
 
 Ephemeral is a browser extension for Bitbucket. That adds the pull request's test environment link to the Bitbucket pull request page for quick access. Available for Firefox and Chrome.

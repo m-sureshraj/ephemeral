@@ -12,7 +12,7 @@ This extension not ready for the general use case. It's only usable if the follo
 
 ## Install
 * [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/ephemeral/)
-* Chrome - Soon to be published
+* [Chrome web store](https://chrome.google.com/webstore/detail/ephemeral/abdhchmphokmjgooncggcbddfbhaabae)
 
 ## Setup
 You can configure the extension via the options page.

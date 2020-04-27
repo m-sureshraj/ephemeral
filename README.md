@@ -9,6 +9,7 @@ This extension not ready for the general use case. It's only usable if the follo
 * The source code should have hosted on the Bitbucket repositories.
 * The pull request should have a testing (preview) environment.
 * The pull request's testing environment URL should be identifiable by the branch name.
+* You must use the Bitbucket's new pull request UI - [How to enable the new pull request interface?](https://community.atlassian.com/t5/Bitbucket-discussions/Try-out-the-new-Bitbucket-Cloud-pull-request-experience-today/td-p/901251) 
 
 ## Install
 * [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/ephemeral/)

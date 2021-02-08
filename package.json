@@ -46,13 +46,11 @@
     "husky": "^4.2.3",
     "jest": "^25.3.0",
     "jest-fetch-mock": "^3.0.3",
+    "jest-webextension-mock": "^3.7.7",
     "kleur": "^3.0.3",
     "lint-staged": "^10.0.8",
     "prettier": "1.19.1",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11"
-  },
-  "dependencies": {
-    "jest-webextension-mock": "^3.7.7"
   }
 }

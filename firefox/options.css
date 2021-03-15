@@ -7,8 +7,11 @@ button {
   margin: 0;
   padding: 0;
 }
+.container {
+  padding: 24px;
+}
 .title {
-  margin: 16px 0 24px;
+  margin-bottom: 16px;
 }
 .row {
   display: flex;
@@ -25,7 +28,7 @@ input {
   min-width: 70%;
 }
 button {
-  margin: 0 0 16px 80px;
+  margin-left: 80px;
   min-width: 140px;
   text-align: center;
   padding: 2px 0;

@@ -1,7 +1,7 @@
 {
   "name": "ephemeral",
   "version": "0.0.0",
-  "description": "Browser extension that adds pull request's test environment link to the Bitbucket pull request page for quick access.",
+  "description": "Browser extension that adds pull request's test environment link to the Bitbucket pull request page for quick access",
   "scripts": {
     "build": "npm run build:firefox && npm run build:chrome",
     "build:firefox": "BROWSER=firefox node scripts/build.js",

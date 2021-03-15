@@ -32,7 +32,21 @@ function createLinkElement(label, href, isEnvReachable) {
 }
 
 function extractBranchName(element) {
-  return element.firstChild.textContent;
+  // Received element structure
+  // <div data-qa="pr-branches-and-state-styles">
+  //   <div>
+  //     <div>
+  //       <span><span>Branch: ${branchName}</span></span>
+  //       <div><span>${branchName}</span></div>
+  //     </div>
+  //   </div>
+  //   <div>...</div>
+  //   <div>...</div>
+  // </div>
+
+  return Array.from(element.firstChild.querySelectorAll('span'))
+    .map(ele => ele.textContent)
+    .pop();
 }
 
 function appendLink(linkElement) {
@@ -46,6 +60,9 @@ function appendLink(linkElement) {
 
 async function addTestEnvLinkToThePage(branchNameElement, linkLabel, linkHref) {
   const branchName = extractBranchName(branchNameElement);
+  logger.debug(`Branch Name: ${branchName}`);
+  logger.debug(`Test environment domain: ${linkHref}`);
+
   const testEnvURL = getTestEnvURL(branchName, linkHref);
   logger.debug(`Test environment URL: ${testEnvURL}`);
 
